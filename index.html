@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LechIT – IT dla firm | lechit.dev</title>
+  <meta name="description" content="Oprogramowanie na zamówienie i wsparcie IT dla małych i średnich firm. Biura rachunkowe, firmy handlowe, przedsiębiorcy. Kontakt: kontakt@lechit.dev" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0f1f3d;
+      --navy-light: #1a3260;
+      --blue: #2563eb;
+      --blue-hover: #1d4ed8;
+      --accent: #3b82f6;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --bg: #ffffff;
+      --bg-soft: #f8fafc;
+      --border: #e2e8f0;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-logo span { color: var(--blue); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--blue); }
+
+    .nav-cta {
+      background: var(--blue);
+      color: #fff !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--blue-hover) !important; color: #fff !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 60%, #1e40af 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 50%, rgba(59,130,246,0.15) 0%, transparent 60%);
+    }
+
+    .hero-content { position: relative; max-width: 720px; }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #93c5fd;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.4rem 1rem;
+      border-radius: 100px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 span { color: #60a5fa; }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      padding: 0.85rem 2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: var(--blue-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      padding: 0.85rem 2rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 1.5px solid rgba(255,255,255,0.35);
+      transition: border-color 0.2s, background 0.2s;
+      display: inline-block;
+    }
+
+    .btn-outline:hover {
+      border-color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      flex-wrap: wrap;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      margin-top: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 2rem; }
+
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+
+    .section-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--blue);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-lead {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      line-height: 1.7;
+    }
+
+    /* ── SERVICES ── */
+    #uslugi { background: var(--bg-soft); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .service-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .service-card:hover {
+      box-shadow: 0 8px 32px rgba(15,31,61,0.1);
+      transform: translateY(-2px);
+    }
+
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      background: #eff6ff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .service-icon svg { width: 24px; height: 24px; color: var(--blue); }
+
+    .service-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .service-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: #eff6ff;
+      color: var(--blue);
+      padding: 0.25rem 0.65rem;
+      border-radius: 100px;
+    }
+
+    /* ── ABOUT ── */
+    #o-mnie { background: var(--bg); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .about-text p {
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    .about-text p strong { color: var(--text); }
+
+    .about-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--bg-soft);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    .highlight-icon {
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      background: #eff6ff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .highlight-icon svg { width: 20px; height: 20px; color: var(--blue); }
+
+    .highlight-item h4 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 0.2rem;
+    }
+
+    .highlight-item p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ── WHO ── */
+    #dla-kogo { background: var(--bg-soft); }
+
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+
+    .who-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .who-emoji { font-size: 2rem; margin-bottom: 0.75rem; }
+
+    .who-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .who-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── CONTACT ── */
+    #kontakt { background: var(--navy); }
+
+    #kontakt .section-tag { color: #60a5fa; }
+    #kontakt .section-title { color: #fff; }
+    #kontakt .section-lead { color: #94a3b8; }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: #cbd5e1;
+    }
+
+    .contact-item-icon {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .contact-item-icon svg { width: 20px; height: 20px; color: #60a5fa; }
+
+    .contact-item-label { font-size: 0.75rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; }
+    .contact-item-value { font-size: 0.95rem; color: #e2e8f0; font-weight: 500; }
+
+    .contact-cta-box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      text-align: center;
+    }
+
+    .contact-cta-box h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-cta-box p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-bottom: 1.75rem;
+      line-height: 1.7;
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--navy);
+      padding: 0.85rem 2rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-white:hover { background: #e2e8f0; transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080f1e;
+      color: #475569;
+      text-align: center;
+      padding: 1.75rem 2rem;
+      font-size: 0.82rem;
+    }
+
+    footer a { color: #60a5fa; }
+
+    /* ── RESPONSIVE NAV ── */
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hero-stats { gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Lech<span>IT</span></div>
+  <ul class="nav-links">
+    <li><a href="#uslugi">Usługi</a></li>
+    <li><a href="#o-mnie">O mnie</a></li>
+    <li><a href="#dla-kogo">Dla kogo</a></li>
+    <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5"/></svg>
+      IT dla firm – Polska
+    </div>
+    <h1>Technologia, która<br /><span>rozwiązuje Twoje problemy</span></h1>
+    <p>Tworzę oprogramowanie na zamówienie i zapewniam wsparcie IT dla małych i średnich firm. Szybko, rzetelnie i bez zbędnego żargonu.</p>
+    <div class="hero-actions">
+      <a href="#kontakt" class="btn-primary">Porozmawiajmy</a>
+      <a href="#uslugi" class="btn-outline">Zobacz usługi</a>
+    </div>
+  </div>
+</section>
+
+<!-- USŁUGI -->
+<section id="uslugi">
+  <div class="section-inner">
+    <div class="section-tag">Usługi</div>
+    <h2 class="section-title">Co mogę dla Ciebie zrobić?</h2>
+    <p class="section-lead">Specjalizuję się w dwóch obszarach, które najczęściej sprawiają problemy małym i średnim firmom.</p>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </div>
+        <h3>Oprogramowanie na zamówienie</h3>
+        <p>Projektuję i tworzę dedykowane systemy dopasowane do Twojej firmy — od prostych automatyzacji po rozbudowane aplikacje. Integruję z systemami, których już używasz (KSeF, ERP, systemy księgowe).</p>
+        <div class="service-tags">
+          <span class="tag">Automatyzacje</span>
+          <span class="tag">Integracje KSeF</span>
+          <span class="tag">Systemy ERP</span>
+          <span class="tag">Aplikacje webowe</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+        </div>
+        <h3>Wsparcie IT dla firm</h3>
+        <p>Zajmuję się bieżącą obsługą IT Twojej firmy — od konfiguracji sprzętu i sieci po pomoc w codziennych problemach technicznych. Działam sprawnie, żebyś mógł skupić się na biznesie.</p>
+        <div class="service-tags">
+          <span class="tag">Helpdesk</span>
+          <span class="tag">Sieci i serwery</span>
+          <span class="tag">Konfiguracja sprzętu</span>
+          <span class="tag">Bezpieczeństwo</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- O MNIE -->
+<section id="o-mnie">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-tag">O mnie</div>
+        <h2 class="section-title">LechIT</h2>
+        <p>Jestem programistą i specjalistą IT z doświadczeniem w pracy z małymi i średnimi firmami. Prowadzę jednoosobową działalność gospodarczą, dzięki czemu masz <strong>bezpośredni kontakt ze mną</strong> — bez pośredników i korporacyjnego żargonu.</p>
+        <p>Rozumiem, że Twój czas jest cenny. Dlatego stawiam na <strong>konkretne rozwiązania i szybką reakcję</strong>. Mówię językiem biznesu, nie tylko technikaliami.</p>
+        <p>Współpracuję stale z kilkoma firmami, w tym biurami rachunkowymi i firmami handlowymi — znam ich codzienne wyzwania IT od podszewki.</p>
+      </div>
+      <div class="about-highlights">
+        <div class="highlight-item">
+          <div class="highlight-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Stała współpraca</h4>
+            <p>Działam długoterminowo – znam Twój system i reaguje zanim problem stanie się kryzysem.</p>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Szybki czas reakcji</h4>
+            <p>Odpowiadam w ciągu 24 godzin. Pilne sprawy – jeszcze szybciej.</p>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div>
+            <h4>Przejrzyste warunki</h4>
+            <p>Jasna wycena przed każdym projektem. Bez ukrytych kosztów.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DLA KOGO -->
+<section id="dla-kogo">
+  <div class="section-inner">
+    <div class="section-tag">Dla kogo</div>
+    <h2 class="section-title">Pracuję z firmami, które&hellip;</h2>
+    <p class="section-lead">Koncentruję się na sektorach, które dobrze znam i w których mogę dostarczyć realną wartość.</p>
+
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-emoji">🧾</div>
+        <h3>Biura rachunkowe</h3>
+        <p>Integracje z KSeF, automatyzacje procesów księgowych, wsparcie przy wdrożeniach systemów.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-emoji">🏪</div>
+        <h3>Firmy handlowe</h3>
+        <p>Systemy zarządzania, integracje z magazynem i sprzedażą, obsługa IT biura i infrastruktury.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-emoji">💼</div>
+        <h3>Przedsiębiorcy</h3>
+        <p>Małe i średnie firmy potrzebujące sprawnego IT bez konieczności zatrudniania etatowego pracownika.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt">
+  <div class="section-inner">
+    <div class="section-tag">Kontakt</div>
+    <h2 class="section-title">Porozmawiajmy o Twoim projekcie</h2>
+    <p class="section-lead">Opisz mi swój problem lub potrzebę — odpiszę w ciągu 24 godzin z wstępną oceną i propozycją działania.</p>
+
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-item-label">E-mail</div>
+            <div class="contact-item-value"><a href="mailto:kontakt@lechit.dev" style="color:#e2e8f0;">kontakt@lechit.dev</a></div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Strona</div>
+            <div class="contact-item-value">lechit.dev</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Lokalizacja</div>
+            <div class="contact-item-value">Polska</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-cta-box">
+        <h3>Bezpłatna konsultacja</h3>
+        <p>Nie jesteś pewien czy Twój problem da się rozwiązać? Napisz — chętnie ocenię sytuację i zaproponuję opcje bez żadnych zobowiązań.</p>
+        <a href="mailto:kontakt@lechit.dev?subject=Zapytanie%20o%20współpracę" class="btn-white">Napisz do mnie</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 LechIT · <a href="mailto:kontakt@lechit.dev">kontakt@lechit.dev</a> · lechit.dev</p>
+</footer>
+
+</body>
+</html>
