@@ -1,0 +1,41 @@
+# ============================================================
+#  LechIT — nagłówki bezpieczeństwa (Hostinger / Apache + LiteSpeed)
+#  Umieść ten plik w katalogu public_html
+# ============================================================
+
+# --- Wymuś HTTPS (jeśli nie robi tego już panel Hostingera) ---
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+<IfModule mod_headers.c>
+  # HSTS — wymuś HTTPS na 1 rok (włącz dopiero, gdy masz pewność, że HTTPS działa wszędzie)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+  # Blokada osadzania strony w ramce (clickjacking)
+  Header always set X-Frame-Options "DENY"
+
+  # Zakaz zgadywania typu MIME
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Ograniczenie wysyłanego nagłówka Referer
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Wyłącz dostęp do wrażliwych API przeglądarki (strona ich nie używa)
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
+
+  # --- Content Security Policy ---
+  # 'unsafe-inline' jest konieczne, bo masz <style> i <script> w pliku HTML.
+  # Jeśli kiedyś wyniesiesz CSS/JS do osobnych plików — można je usunąć (bezpieczniej).
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
+</IfModule>
+
+# --- Ukryj plik .htaccess i pliki ukryte ---
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
+# --- Wyłącz listowanie katalogów ---
+Options -Indexes
