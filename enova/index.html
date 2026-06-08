@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Programista enova365 – workery, integracje, rozszerzenia | LechIT</title>
+    <meta name="description" content="Tworzę własne workery, taski, integracje i rozszerzenia dla enova365. Automatyzacja procesów, połączenie z zewnętrznymi systemami, raporty na zamówienie. Sprawdź co mogę zrobić dla Twojej firmy." />
+    <meta name="keywords" content="programista enova365, developer enova365, worker enova365, integracja enova365, rozszerzenia enova365, enova API, enova na zamówienie" />
+    <link rel="canonical" href="https://lechit.dev/enova" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Programista enova365 – workery, integracje, rozszerzenia | LechIT" />
+    <meta property="og:description" content="Własne workery, automatyczne taski i integracje dla enova365. Bez kompromisów, dopasowane do Twojej firmy." />
+    <meta property="og:url" content="https://lechit.dev/enova" />
+    <meta property="og:type" content="website" />
+
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0d0d14;
+            --bg2: #13131f;
+            --card: #1a1a2e;
+            --purple: #7c5cfc;
+            --purple-light: #a78bfa;
+            --text: #e2e2f0;
+            --muted: #8888aa;
+            --border: #2a2a45;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--purple-light);
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        /* NAV */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 2rem;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            background: var(--bg);
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+            .nav-logo span {
+                color: var(--purple);
+            }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+            .nav-links a {
+                color: var(--muted);
+                font-size: 0.95rem;
+            }
+
+                .nav-links a:hover {
+                    color: var(--text);
+                    text-decoration: none;
+                }
+
+        .btn-primary {
+            background: var(--purple);
+            color: #fff;
+            padding: 0.55rem 1.3rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: opacity 0.2s;
+        }
+
+            .btn-primary:hover {
+                opacity: 0.85;
+                text-decoration: none;
+            }
+
+        /* HERO */
+        .hero {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 99px;
+            padding: 0.3rem 1rem;
+            font-size: 0.82rem;
+            color: var(--muted);
+            margin-bottom: 1.5rem;
+        }
+
+            .badge::before {
+                content: "● ";
+                color: var(--purple);
+            }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.2rem;
+        }
+
+            h1 em {
+                font-style: normal;
+                color: var(--purple-light);
+            }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--muted);
+            max-width: 620px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.55rem 1.3rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: border-color 0.2s;
+        }
+
+            .btn-outline:hover {
+                border-color: var(--purple);
+                text-decoration: none;
+            }
+
+        /* SECTIONS */
+        section {
+            padding: 4rem 2rem;
+        }
+
+        .section-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--purple);
+            margin-bottom: 0.8rem;
+        }
+
+        h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 800;
+            line-height: 1.25;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            color: var(--muted);
+            max-width: 580px;
+            margin-bottom: 2.5rem;
+            font-size: 1rem;
+        }
+
+        /* GRID CARDS */
+        .grid {
+            display: grid;
+            gap: 1.2rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.6rem;
+        }
+
+            .card h3 {
+                font-size: 1.05rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+            }
+
+            .card p {
+                font-size: 0.9rem;
+                color: var(--muted);
+                line-height: 1.55;
+            }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(124,92,252,0.15);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        /* CHECKLIST */
+        .checklist {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+            .checklist li {
+                display: flex;
+                gap: 0.8rem;
+                font-size: 0.95rem;
+                color: var(--text);
+            }
+
+                .checklist li::before {
+                    content: "✓";
+                    color: var(--purple);
+                    font-weight: 700;
+                    flex-shrink: 0;
+                }
+
+                .checklist li span {
+                    color: var(--muted);
+                    display: block;
+                    font-size: 0.85rem;
+                    margin-top: 0.1rem;
+                }
+
+        /* TWO COL */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        @media (max-width: 680px) {
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* DIVIDER */
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+        }
+
+        /* FAQ */
+        .faq {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .faq-item {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.2rem 1.4rem;
+        }
+
+            .faq-item h3 {
+                font-size: 0.98rem;
+                font-weight: 700;
+                margin-bottom: 0.5rem;
+            }
+
+            .faq-item p {
+                font-size: 0.88rem;
+                color: var(--muted);
+            }
+
+        /* CTA SECTION */
+        .cta-box {
+            background: linear-gradient(135deg, rgba(124,92,252,0.15), rgba(124,92,252,0.05));
+            border: 1px solid rgba(124,92,252,0.3);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+            .cta-box h2 {
+                margin-bottom: 0.8rem;
+            }
+
+            .cta-box p {
+                color: var(--muted);
+                margin-bottom: 1.8rem;
+            }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAWIGACJA -->
+    <nav>
+        <a href="/" class="nav-logo" style="text-decoration:none">
+            <div style="width:28px;height:28px;background:var(--purple);border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.85rem">L</div>
+            Lech <span>IT</span>
+        </a>
+        <div class="nav-links">
+            <a href="/#uslugi">Usługi</a>
+            <a href="/#jak-dzialem">Jak działam</a>
+            <a href="/#o-mnie">O mnie</a>
+            <a href="/enova" style="color:var(--purple-light)">enova365</a>
+        </div>
+        <a href="/#kontakt" class="btn-primary">Napisz do mnie</a>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="badge">Specjalizacja – enova365</div>
+        <h1>Programista <em>enova365</em> — workery, integracje i rozszerzenia na zamówienie</h1>
+        <p>Tworzę dedykowane rozwiązania w enova365: własne workery, automatyczne taski, integracje z zewnętrznymi systemami i rozszerzenia modułów. Bez kompromisów, dopasowane do tego jak naprawdę pracuje Twoja firma.</p>
+        <div class="hero-cta">
+            <a href="/#kontakt" class="btn-primary">Porozmawiajmy →</a>
+            <a href="#co-robie" class="btn-outline">Co mogę zrobić</a>
+        </div>
+    </header>
+
+    <hr />
+
+    <!-- CO ROBIĘ -->
+    <section id="co-robie">
+        <div class="section-inner">
+            <div class="section-label">Zakres usług</div>
+            <h2>Co mogę zrobić w enova365</h2>
+            <p class="section-desc">Pracuję bezpośrednio w kodzie enova365 — tworzę rozwiązania których nie ma w standardowym systemie.</p>
+
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-icon">⚙️</div>
+                    <h3>Własne workery</h3>
+                    <p>Automatyczne procesy działające w tle — wysyłanie e-maili, przetwarzanie dokumentów, synchronizacja danych, powiadomienia. Worker uruchamia się sam, bez udziału użytkownika.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📋</div>
+                    <h3>Taski i harmonogramy</h3>
+                    <p>Zaplanowane zadania wykonywane o określonych porach — eksport danych, generowanie raportów, archiwizacja, przypomnienia. Działa jak Twój cichy pracownik 24/7.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔗</div>
+                    <h3>Integracje z zewnętrznymi systemami</h3>
+                    <p>Łączę enova365 z zewnętrznymi systemami przez API — sklepy internetowe, platformy sprzedażowe, aplikacje wewnętrzne, KSeF. Dane przepływają automatycznie, bez ręcznego przepisywania.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🧩</div>
+                    <h3>Rozszerzenia modułów</h3>
+                    <p>Dodatkowe pola, zakładki, okna i logika w modułach Handel, Kadry, Finanse, CRM. Enova robi dokładnie to, czego potrzebuje Twoja firma — nie odwrotnie.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>Raporty i zestawienia</h3>
+                    <p>Dedykowane raporty i eksporty do Excela/PDF. Dokładnie te dane, w tej formie w jakiej ich potrzebujesz — gotowe do druku lub dalszej analizy.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr />
+
+    <!-- DLA KOGO -->
+    <section>
+        <div class="section-inner">
+            <div class="two-col">
+                <div>
+                    <div class="section-label">Dla kogo</div>
+                    <h2>Firmy które korzystają z enova365 i chcą więcej</h2>
+                    <p style="color:var(--muted);margin-bottom:1.5rem;font-size:0.95rem">Pracuję z firmami, które mają enova365 ale standardowe możliwości im już nie wystarczają.</p>
+                    <ul class="checklist">
+                        <li>Masz powtarzalne ręczne procesy których nie ma jak zautomatyzować w standardzie<span>Tworzę worker który robi to za Ciebie automatycznie</span></li>
+                        <li>Enova nie "rozmawia" z innym systemem którego używasz<span>Buduję integrację przez API — dane przepływają same</span></li>
+                        <li>Potrzebujesz raportu który nie istnieje w enova<span>Piszę go od zera, w tej formie jakiej potrzebujesz</span></li>
+                        <li>Chcesz dodać własną logikę lub pola do modułu enova<span>Rozszerzam moduły bez ingerencji w standardowy kod systemu</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="section-label">Technologia</div>
+                    <h2>Jak to technicznie działa</h2>
+                    <p style="color:var(--muted);margin-bottom:1.5rem;font-size:0.95rem">Dla zainteresowanych — stack którego używam w projektach enova365:</p>
+                    <div class="grid" style="gap:0.7rem">
+                        <div class="card" style="padding:1rem 1.2rem">
+                            <h3 style="font-size:0.9rem">SDK enova365</h3>
+                            <p>Rozszerzenia pisane bezpośrednio w C# z wykorzystaniem oficjalnego SDK Sonety</p>
+                        </div>
+                        <div class="card" style="padding:1rem 1.2rem">
+                            <h3 style="font-size:0.9rem">REST API</h3>
+                            <p>Integracje z zewnętrznymi systemami przez dedykowane endpointy</p>
+                        </div>
+                        <div class="card" style="padding:1rem 1.2rem">
+                            <h3 style="font-size:0.9rem">SQL Server</h3>
+                            <p>Bezpośrednie zapytania i procedury składowane gdy wydajność ma znaczenie</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr />
+
+    <!-- FAQ -->
+    <section>
+        <div class="section-inner">
+            <div class="section-label">FAQ</div>
+            <h2>Najczęstsze pytania</h2>
+            <p class="section-desc">Odpowiedzi na pytania które zazwyczaj padają przed startem projektu.</p>
+            <div class="faq">
+                <div class="faq-item">
+                    <h3>Czy muszę mieć aktywną umowę serwisową z Sonetą?</h3>
+                    <p>Nie jest to wymagane do uruchomienia własnych rozszerzeń. W przypadku aktualizacji enova do nowszej wersji warto ją mieć — omówimy to przy wycenie projektu.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Jak długo trwa typowy projekt?</h3>
+                    <p>Prosty worker lub integracja — zazwyczaj 1–2 tygodnie. Rozbudowane rozszerzenia modułów — 3–6 tygodni. Po pierwszej rozmowie podaję realny szacunek dla Twojego przypadku.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Czy rozszerzenia będą działać po aktualizacji enova?</h3>
+                    <p>Piszę kod zgodnie z wytycznymi SDK Sonety, co minimalizuje ryzyko. Zazwyczaj po aktualizacji wymagana jest tylko rekompilacja — jeśli coś się posypie, pomagam to naprawić.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Jaką wersję enova365 obsługujesz?</h3>
+                    <p>Pracuję z aktualnymi wersjami enova365 (Srebrna, Złota, Platynowa). Powiedz mi jaką wersję masz — dobiorę odpowiednie podejście.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Czy oferujesz wsparcie po zakończeniu projektu?</h3>
+                    <p>Tak — mogę prowadzić opiekę stałą lub reagować incydentalnie. Omówimy co lepiej pasuje do Twoich potrzeb.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr />
+
+    <!-- CTA -->
+    <section>
+        <div class="section-inner">
+            <div class="cta-box">
+                <h2>Masz projekt w enova365?</h2>
+                <p>Opisz mi co chcesz osiągnąć — odpiszę w ciągu 24 godzin z pierwszą oceną czy i jak to zrobić.</p>
+                <a href="mailto:lechu3103@gmail.com" class="btn-primary" style="display:inline-block;padding:0.75rem 2rem;font-size:1rem">Napisz do mnie →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025 LechIT · <a href="/">Strona główna</a> · <a href="mailto:lechu3103@gmail.com">lechu3103@gmail.com</a></p>
+    </footer>
+
+</body>
+</html>
